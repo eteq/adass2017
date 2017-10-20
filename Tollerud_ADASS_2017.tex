@@ -12,7 +12,7 @@
 
 \documentclass[11pt,twoside]{article}
 
-% Do NOT use ANY packages other than asp2014. 
+% Do NOT use ANY packages other than asp2014.
 \usepackage{asp2014}
 
 \aspSuppressVolSlug
@@ -33,13 +33,15 @@
 % Use mixed case type for the shortened title
 % Ensure shortened title does not cause an overfull hbox LaTeX error
 % See ASPmanual2010.pdf 2.1.4  and ManuscriptInstructions.pdf for more details
-\markboth{Author1, Author2, and Author3}{Short Title}
+\markboth{Tollerud}{Community Programming \& Astropy}
+
+\newcommand{\astropypkg}{\textit{astropy}}
 
 \begin{document}
 
-\title{ADASS Author Template}
+\title{Community-Oriented Programming in Astronomy: Astropy as a Case Study}
 
-% Note the position of the comma between the author name and the 
+% Note the position of the comma between the author name and the
 % affiliation number.
 % Author names should be separated by commas.
 % The final author should be preceded by "and".
@@ -47,18 +49,14 @@
 % authors share an affiliation this should be in a single \affil which can then
 % be referenced for several author names.
 % See ManuscriptInstructions.pdf and ASPmanual2010.pdf 3.1.4 for more details
-\author{Sample~Author1,$^1$ Sample~Author2,$^2$ and Sample~Author3$^3$
-\affil{$^1$Institution Name, Institution City, State/Province, Country; \email{AuthorEmail@email.edu}}
-\affil{$^2$Institution Name, Institution City, State/Province, Country}
-\affil{$^3$Institution Name, Institution City, State/Province, Country}}
+\author{Erik~J.~Tollerud$^1$
+\affil{$^1$Space Telescope Science Institute, Baltimore, MD, USA; \email{etollerud@stsci.edu}}}
 
 % This section is for ADS Processing.  There must be one line per author.
-\paperauthor{Sample~Author1}{Author1Email@email.edu}{ORCID_Or_Blank}{Author1 Institution}{Author1 Department}{City}{State/Province}{Postal Code}{Country}
-\paperauthor{Sample~Author2}{Author2Email@email.edu}{ORCID_Or_Blank}{Author2 Institution}{Author2 Department}{City}{State/Province}{Postal Code}{Country}
-\paperauthor{Sample~Author3}{Author3Email@email.edu}{ORCID_Or_Blank}{Author3 Institution}{Author3 Department}{City}{State/Province}{Postal Code}{Country}
+\paperauthor{Erik~J.~Tollerud}{etollerud@stsci.edu}{0000-0002-9599-310X}{Space Telescope Science Institute}{}{Baltimore}{MD}{21211}{USA}
 
 \begin{abstract}
-This is the ADASS 2017 author template file.  This is based on the Astronomical Society of the Pacific (ASP) 2014 template, but has been modified to reflect the specific ADASS requirements.
+Both science and industry have seen a recent major change in how open source software is developed: the advent of and widespread adoption of internet-based code repositories (most notably Github). At the same time, software has become even more indispensable for Astronomy, both as a product (i.e. developed by engineers) and a part of the field itself (i.e., written by astronomers). I will describe how these trends led to the creation and development of the Astropy Project, the organization developing primary open-source library for astronomy in Python.  I will describe Astropy's community-developed model and how it has guided the efforts of over 200 geographically widespread developers into a coherent set of open-source libraries. I will also discuss future prospects for adapting relevant parts of this model to more specific astronomy domains, observatories, or missions.
 \end{abstract}
 
 % These lines show examples of subject index entries. At this stage these have to commented
@@ -68,124 +66,231 @@ This is the ADASS 2017 author template file.  This is based on the Astronomical 
 %\ssindex{conference!ADASS 2017}
 %\ssindex{organisations!ASP}
 
-\section{The Template}
-To fill in this template, make sure that you read and follow the ASPCS Instructions for Authors and Editors available for download online. Further hints and tips for including graphics, tables, citations, and other formatting helps are available there. With this template, you should have received a copy of the specific ADASS manuscript instructions, and you should also read these.
+\section{Introduction}
 
-\subsection{The Author Checklist}
-The following checklist should be followed when writing a submission to a conference proceedings to be published by the ASP for ADASS. The references are to sections in the ADASS manuscript instructions.\footnote{Most URLs should be in a footnote like this one.  In this case, you can download the online material from \url{http://www.adass.org}.} 
+Both science and industry have seen a recent major change in how open source software is developed.
+The advent of source code repositories available and easily manageable via the web has enabled software development to become quickly more transparent and ``open'' in a broader sense beyond the simple ability to download the source code \citep{dabbish12}.
+Most notable of these has been Github \footnote{\url{http://www.github.com}}, which has become the dominant clearinghouse for most recently-developed open source science software.
 
-\begin{itemize}
-\checklistitemize
+At the same time, astronomy has continued to grow more dependent on modern software developed in this mold.
+\citet{momtoll15} demonstrate that Python has come to be the most-used language by research astronomers, primarily through use of the open source libraries developed for Python that allow it to be an efficient numerical language \citep[e.g][]{numpyscipy, matplotlib}.
+At the same time, larger projects or observatories like the Large Synoptic Survey Telescope (LSST), James Webb Space Telescope (JWST), or Gemini Observatory have focused engineering efforts using Python for engineering tasks, recognizing synergies of sharing a language for science and engineering that is of general enough applicability that it has a larger programming ecosystem surrounding it.
+It is in (and as a part of) this context that the Astropy Project came into being.
+Here I will describe how this happened as a case study of the fully-open workflow enabled by modern code sharing tools.
 
-\item References must all use BibTeX entries in a .bib file. No use of \verb"\bibitem"! (Even though some older ASP templates have them.) (See References.)
-\item All references must be cited in the text, usually using \verb"\citet" or \verb"\citep".  Do not use \verb"\cite". (See References.)
-\item No LaTeX warnings. Particularly, no overfull hboxes or unresolved references. (See LaTeX warnings and errors.)
-\item No use of \verb"\usepackage" except for \verb"\usepackage{asp2014}". (See LaTeX packages and commands.)
-\item No use of \verb"\renewcommand" or \verb"\renewenvironment". (See LaTeX packages and commands.)
-\item Arguments to \verb"\citep" etc., should use ADS type references where possible, fall back on <author><year> or something suitably unique if not. (See References.)
-\item References in the text are all generated automatically (using \verb"\citep" etc), not put in explicitly as ordinary text that just looks like a generated reference. (See References.)
-\item Definitely no LaTeX errors. (See LaTeX warnings and errors.)
-\item Paper is the right length. References don't spill over into one more page. (See Length of Paper.)
-\item Paper has an abstract. (See Length of Paper.)
-\item References are to things that actually exist and can be expected to continue to exist. Not papers ``in preparation'' or URLs for blog items. (See References.)
-\item Graphics files have to be .eps encapsulated Postscript format. Yes they do! Sorry, but they do. (See Figures.)
-\item Name all the files properly:- figures are <paper>\_f<n>.eps, eg O1-3\_f1.eps. Paper names use dashes not periods, O1-3.tex not O1.3.tex. Posters now use the same naming convention as oral papers, e.g.\ P3-21. (See File names and Paper IDs.)
-\item Figure captions should make sense if the figure is printed in monochrome - because it will be! (See Figures.)
-\item Figures are legible at the size ADASS Proceedings volumes are printed, which is quite small. (See Figures.)
-\item Copyright forms signed and filled out - don't use electronic signatures. (See Miscellany.)
-\item Author lists follow the correct format: comma separated, with an `and' for the final author. (See Authors and Affiliations.)
-\item The first author of the paper must be the person who presented the paper at the conference. (See Authors and Affiliations.)
-\item No repetition of affiliations - list each organisation once, with multiple e-mail addresses if you really must. (See Authors and Affiliations.)
-\item Running heads should fit in the same horizontal space as the text does, not pushing the page numbers over to the right. (See LaTeX warnings and errors.)
-\item Run through a spelling checker. (I know that can be tricky with LaTeX.) (See Content and Typesetting.)
-\item Proofread, or have the text proofread, to check for proper English usage. In particular, note that ``allows to'' is not conventional English, and English uses articles (`a',`an',`the') in places where other languages, particularly Eastern European languages, don't have them. (See Content and Typesetting.)
-\end{itemize}
+\section{Astropy as a Package}
 
-\section{Text}
-Sometimes you just need to have different styles of fonts.  \emph{Sometimes you just need to have different styles of fonts.} \textbf{Sometimes you just need to have different styles of fonts.}
+Astropy \citep{astropy}  came into being primarily through a grassroots effort.
+The astropy mailing list\footnote{\url{https://mail.python.org/mailman/listinfo/astropy}} (which pre-dates the Astropy Project by over a decade) almost since its inception had regular discussions of general-purpose or more domain-specific libraries and how or if they should interoperate.
+By 2011 (particularly with a thread begun in June 2011), this discussion reached a point where a critical mass of participants had decided that their efforts to develop Python astronomy tools should be shared.
+This lead to a series of planning documents, and votes on leadership, ending in a vision for a core Python library for astronomy.
+Despite this somewhat free-wheeling environment, the structures established there have continued (albeit with some evolution) into the present-day Astropy package and Project.
 
-Sometimes you just need to have different sizes of fonts.  {\small Sometimes you just need to have different sizes of fonts.} {\footnotesize Sometimes you just need to have different sizes of fonts.}  It would be very rare to require larger fonts within an ASP volume.
-
-Do \emph{not} reduce the size of the main text font to try to squeeze more content into the paper. It will be restored by the editors and the paper will be rejected as too long.
-
-\section{Math}
-Sometimes authors include formulas inside the main text which should always be enclosed within \$ signs.  Look at the Pythagorean Formula $a^2 + b^2 = c^2$.
-
-Sometimes authors include formulas on their own lines.  This example uses the \verb"displaymath" environment which does not include an equation number.  To include an equation number, use the \verb"equation" environment.
-\begin{displaymath}
-c = \sqrt{a^2 + b^2} \qquad \textrm{Pythagorean Theorem}
-\end{displaymath}
-
-\section{Table}
-Here is an example table that has three colums with various justification and row spacing.
-
-\begin{table}[!ht]
-\caption{Tables in \LaTeXe}
-\smallskip
-\begin{center}
-{\small
-\begin{tabular}{llc}  % l = left, c = centered
-\tableline
-\noalign{\smallskip}
-First Column & Second Column & Third Column:\\
-\noalign{\smallskip}
-\tableline
-\noalign{\smallskip}
-First Row, First Column & First Row, Second Column & First Row, Third Column \\
-Second Row, First Column & Second Row, Second Column & Second Row, Third Column \\
-Third Row, First Column & Third Row, Second Column & Third Row, Third Column \\
-\noalign{\smallskip}
-\tableline % Sometimes you just need a line between table rows
-\noalign{\smallskip}
-Fourth Row, First Column & ~ & Fourth Row, Third Column \\ % Sometimes you have empty cells
-\noalign{\smallskip} % Sometimes you just need space between table rows
-Fifth Row First Column & Fifth Row, Second Column & Fifth Row, Third Column\\ % No \\ if the last row
-\noalign{\smallskip}
-\tableline\
-\end{tabular}
-}
-\end{center}
-\end{table}
-\noindent These tables can get a little messy, but this format is the most common.
-
-\section{Lists}
-\label{ex_lists}
-There are a lot of ways to make lists including itemized lists with bullets, for which you use  (\verb"\begin{itemize}"), numbered lists (\verb"\begin{enumerate}"), and description lists (\verb"\begin{description}").  This is an example of an itemized list.
-
-\subsection{Itemized Lists}
-Here is an itemized list:
-\begin{itemize}
-\item Item 1
-\item Item 2
-\item Item 3
-\end{itemize}
+While the above describes the origins of the effort, the true success lies in the continued contributions.  Figure \ref{commiters} demonstrates this, showing the number of unique contributors to the core \astropypkg{} package over time.
+The package has continued to gain contributors, well over 200 at the time of this writing.
+While many of these contributors provide one or a handful of contributions - the distribution of commits per person roughly follows a power law, or Zipf's law in this context \citep{zipflaw} - there has been a continuing influx of new substantial contributors over the project's lifetime.
+This growth is especially notable given that essentially none of these contributors are paid by Astropy or any other formal mechanism specifically for this development.
+Hence, this model has provided an effective way to pool the efforts of developers and scientists who otherwise likely would have been forced to develop this machinery on their own (or simply not been able to do the same level of work).
 
 
-\section{Images}
-For some figures, see Figures \ref{ex_fig1}- \ref{ex_fig3}.
+\articlefigure{commiters.eps}{commiters}{Unique contributors to the \astropypkg{} since the project's inception.}
 
-\articlefigure{example.eps}{ex_fig1}{Welcome to 1953.}
-% It is possible to reduce the size of a figure among other changes (see the instructions).  Here is an example:
-% \articlefigure[width=.5\textwidth]{example.eps}{ex_fig1_reduced}{Welcome to 1953 a little smaller.}
+While the above demonstrates the \astropypkg{} package's ability to combine the efforts of developers, it tells little of how this coordination is achieved.  While there is a sociological aspect of understanding how to build and foster communities that cannot be understated, this work focuses primarily on the technological tools that make the distributed development model possible. In particular I highlight 3 areas: the Pull Request workflow on Github, automated tests with continuous integration, and both automated \emph{and} narrative documentation emphasized as being part of the code.
 
-\articlefiguretwo{example.eps}{example.eps}{ex_fig2}{Now there are two of them.  \emph{Left:} An image from long ago.  \emph{Right:} The same exact thing.}
-% There is a figure command allowing for three figures:
-% \articlefigurethree{example.eps}{example.eps}{example.eps}{ex_fig1_triple}{Now there are three of them.}
+The core element to gaining new contributors is the process for providing new or improved code.
+In Astropy, \emph{all} code (aside from occasional house-keeping tasks) is provided by Pull Request using Github.
+The typical workflow requires a potential contributor to fork the \astropypkg{} repository to their Github account, make a change to the code, track it using git\footnote{http://git-scm.com}, place this change on a branch on their fork, and then request that this change be included in the primary astropy repository (a Pull Request).
+Once the Pull Request has been created, \emph{any} Github user can comment on the code.
+While in practice this is one of the more experienced Astropy developers, features of particular interest regularly attract attention from even casual users who have an opinion on the API or scientific content of a particular contribution.
+Typically these comments are an iterative process that leads to consensus, although when this does not occur on a reasonable timescale, the Astropy coordination committee or a sub-package maintainer is empowered to make command decisions.
+These Pull Request comment periods are also the primary mechanism for enforcing code and correctness standards, as detailed further below.
+In practice this process also serves as one of the key ways a contributors enters into the Astropy community: by contributing effort, they gain insight into the code and an opportunity to shape the interface and design of the package as a whole (a process sometimes known as ``do-ocracy'').
+This therefore provides a powerful mechanism to engage the astronomical community in software development - the design of APIs and algorithms is primarily done in this form, either by or through close contact with precisely the community that will \emph{use} the tools, with a very specific implementation (the PR itself) used as a concrete item to discuss.
+Even procedural decisions regarding the whole Astropy Project are addressed in a similar manner through a process called Astropy Proposals for Enhancement (APEs), which are written and commented on using the Pull Request workflow\footnote{https://github.com/astropy/astropy-APEs}.
 
-\articlefigurefour{example.eps}{example.eps}{example.eps}{example.eps}{ex_fig3}{Now four of them?}
+While the Pull Request workflow provides a powerful way for nearly anyone to provide and review code, in practice, reviews are rarely thorough enough on their own to ensure the code does not contain substantial bugs.
+To address this problem, Astropy relies heavily on testing frameworks and continuous integration.
+More specifically, the \astropypkg{} core package uses on the \textit{py.test}\footnote{\url{https://docs.pytest.org/}} package to collect and run automated tests.
+It then uses the Travis-CI\footnote{https://travis-ci.org/} framework to run those tests on \emph{every} Pull Request that is contributed.
+A Pull Request that does not pass the tests is not merged until the author (sometimes with the help of commenters) resolves the failing test.
+At the same time, \emph{new} code is expected to include unit tests that demonstrate the code does what it claims, loosely enforced via automated code coverage tools.
+In this way, code changes have a fighting chance of keeping the codebase bug-free, and new contributions provide their own checks to ensure they keep consistent behavior for the future.
+This also ensures that changes in one area of the code have fewer un-intended side effects elsewhere.
+Hence, unit tests coupled with Continuous Integration tools are critical to maintaining the health of the code base, so that  much of the code can be contributed and maintained by a relatively small fraction of the total developer population.
 
-\clearpage % To force this stuff to happen by this point in the text, otherwise these will probably end up after the references.
+The third critical element centers around documentation.
+While the above elements provide a low barrier of entry to contributing code that behaves as expected, it does nothing to ensure this behavior is communicated to \emph{users} of the code.
+Yet the same problem exists as for Continuous Integration, that only a small fraction of the developers provide code for any given sub-package.
+To address this, \astropypkg{} relies on building documentation using \textit{sphinx} and a set of extensions to it that  combine narrative documentation with more low-level API documentation.
+While the former must be hand-written by its very nature, the latter is written as part if the code.
+Python provides a concept of ``docstrings'' that can be extracted directly from a package and used by \textit{sphinx} to generate structured API documentation tightly integrated with the narrative pages.
+The documentation, like the unit tests, are automatically built for each Pull Request, ensuring that they are written at least with proper syntax, and that the web-hosted version of the docs are always up-to-date with the latest changes.
+Also like with the tests, there is an understanding that it is the responsibility of the code contributor to write documentation (at least in the form of docstrings) for any code they contribute, thereby ensuring the code author's expertise is embedded in the documentation at the time the code is written.
+While this at times can be a less-optimal way to write docs (the author often knows the code \emph{too} well to write docs effective at teaching a novice user), it provides a sound baseline that further documentation contributions can improve on.
 
-There are also the landscape versions \verb"\articlelandscapefigure" and \\
-\verb"\articlelandscapefiguretwo" which are further described in the instructions.
+These three elements - Github Pull Requests, unit testing with Continuous Integration, and consistent and immediate documentation - are hence thus the foundation the \astropypkg{} core package is built in.
+These technologies provide a foundation without which the package could not have developed.
+
+
+\section{Astropy as a Project}
+
+The above discussion focuses primarily on the \astropypkg{} core package, but this is only a part of the wider Astropy Project.
+The Project includes the core package, but also an ever-growing list of additional Python astronomy packages that add functionality to create a complete ecosystem - these are known as Astropy ``affiliated packages''.
+While many of these follow a development process very similar to that outlined above, they are not required to - the main expectation of affiliated packages is that they follow minimal coding standards (i.e. have unit tests and documentation), and that they buy into the ``vision'' for the Astropy Project of code interoperability and not re-inventing the wheel without a specific need.
+These affiliated packages are reviewed when they apply to join and are accepted or rejected by the Astropy coordination committee.
+
+While these are all independent packages, their reasons for joining the Project are variable.
+Many are not part of the core due to having relatively niche or domain-specific functionality \citep[e.g.][]{halotools}.
+Others are of general interest but are being developed separate from the core to decouple their development and release process from the core package \citep[e.g.][]{photutils}.
+This allows ``experimental'' features that need more input from the community to be tested in an easier-to-adapt environment, in preparation for possible future integration in the core.
+
+This overall division of looser mostly-independent affiliated packages and a more core-oriented set of Astropy coordinated packages is planned to be a more formal arrangement.
+The intent is to create a flexible set of core packages that meet most of the expected baseline needs of the astronomy community (a la IRAF), while at the same time maintaining an ecosystem of more experimental or domain-specific packages that are still valuable for astronomy (like similar efforts in other domains like  rOpenSci\footnote{\url{https://ropensci.org/}})
+The exact details of this division between ``Astropy coordinated'' and ``Astropy affiliated'' packages is still being worked finalized, but will be a key element of the project, moving forward.
+
+This structural evolution of the project is also reflected in its governance structure.
+In the early days the project was primarily overseen directly by the coordination committee.
+As the project has grown, the coordination committee has moved to a more oversight-oriented role (albeit with some of its \emph{members} continuing in specific coding roles).
+At the same time, the Project has developed more formalized roles, both to make it clear where responsibility  lies for specific tasks, and to ensure that credit is given to ensure those who participate in this volunteer project receive recognition for their service to the astronomy community.
+These formal roles have developed organically as the Project has evolved, overseen by the coordination committee, but based on the needs of the Project as the code base and organizational structures have grown.
+
+\section{Conclusions}
+
+While the focus of this discussion has been Astropy, it is important to recognize that this is a microcosm of a larger shift in both software development and science.
+As software and data science continue to become more central to astronomy, the organic process of open science and open source software will continue to become more relevant.
+It is clear that the new generation of tools enabling this shift has the potential to make science more reproducible and accurate\citep{ram13}, but only if a shared understanding of the necessary development practices is grown and maintained.
+While Astropy might serve as an example of \emph{some} useful practices in this direction, we must remain cognizant of how such new developments change what is possible in Astronomy, and help shepherd them to maximize science returns and the future prospects for those of us in the field.
+
+
+\acknowledgements The author thanks the Astropy community.  Without the active
+and lively community of astronomers and engineers that contribute to its
+development, often on their own time, none of the above would be possible.
 
 \section{References}
-References must be provided in BibTeX format, in a .bib file, and should usually be referenced using \verb"\citet" or \verb"\citep". The file example.bib supplied with this template is taken from an ADASS 2015 paper, and includes references to previous ADASS proceedings 
-\citep[such as][]{1999ASPC..172..487P} and to papers in what was then the current 2015 proceedings (e.g.\ \citet{O11-4_adassxxv}). Note that the `TBD' entries that appear for papers in the current proceedings will be dealt with by the ADASS editors when the final volume is produced. The example .bib file has a large number of references unused by this template file; such unused references have been left in as an example, but should be removed before a paper is submitted.
 
-\acknowledgements The ASP would like to thank the dedicated researchers who are publishing with the ASP.  It will make things a lot easier if you keep this text on the same line as the \verb"\acknowledgements" command.
+\bibliography{tollerud_adass}  % For BibTex
 
 
-\bibliography{example}  % For BibTex
+% \clearpage
+%
+% \section{The Template}
+% To fill in this template, make sure that you read and follow the ASPCS Instructions for Authors and Editors available for download online. Further hints and tips for including graphics, tables, citations, and other formatting helps are available there. With this template, you should have received a copy of the specific ADASS manuscript instructions, and you should also read these.
+%
+% \subsection{The Author Checklist}
+% The following checklist should be followed when writing a submission to a conference proceedings to be published by the ASP for ADASS. The references are to sections in the ADASS manuscript instructions.\footnote{Most URLs should be in a footnote like this one.  In this case, you can download the online material from \url{http://www.adass.org}.}
+%
+% \begin{itemize}
+% \checklistitemize
+%
+% \item References must all use BibTeX entries in a .bib file. No use of \verb"\bibitem"! (Even though some older ASP templates have them.) (See References.)
+% \item All references must be cited in the text, usually using \verb"\citet" or \verb"\citep".  Do not use \verb"\cite". (See References.)
+% \item No LaTeX warnings. Particularly, no overfull hboxes or unresolved references. (See LaTeX warnings and errors.)
+% \item No use of \verb"\usepackage" except for \verb"\usepackage{asp2014}". (See LaTeX packages and commands.)
+% \item No use of \verb"\renewcommand" or \verb"\renewenvironment". (See LaTeX packages and commands.)
+% \item Arguments to \verb"\citep" etc., should use ADS type references where possible, fall back on <author><year> or something suitably unique if not. (See References.)
+% \item References in the text are all generated automatically (using \verb"\citep" etc), not put in explicitly as ordinary text that just looks like a generated reference. (See References.)
+% \item Definitely no LaTeX errors. (See LaTeX warnings and errors.)
+% \item Paper is the right length. References don't spill over into one more page. (See Length of Paper.)
+% \item Paper has an abstract. (See Length of Paper.)
+% \item References are to things that actually exist and can be expected to continue to exist. Not papers ``in preparation'' or URLs for blog items. (See References.)
+% \item Graphics files have to be .eps encapsulated Postscript format. Yes they do! Sorry, but they do. (See Figures.)
+% \item Name all the files properly:- figures are <paper>\_f<n>.eps, eg O1-3\_f1.eps. Paper names use dashes not periods, O1-3.tex not O1.3.tex. Posters now use the same naming convention as oral papers, e.g.\ P3-21. (See File names and Paper IDs.)
+% \item Figure captions should make sense if the figure is printed in monochrome - because it will be! (See Figures.)
+% \item Figures are legible at the size ADASS Proceedings volumes are printed, which is quite small. (See Figures.)
+% \item Copyright forms signed and filled out - don't use electronic signatures. (See Miscellany.)
+% \item Author lists follow the correct format: comma separated, with an `and' for the final author. (See Authors and Affiliations.)
+% \item The first author of the paper must be the person who presented the paper at the conference. (See Authors and Affiliations.)
+% \item No repetition of affiliations - list each organisation once, with multiple e-mail addresses if you really must. (See Authors and Affiliations.)
+% \item Running heads should fit in the same horizontal space as the text does, not pushing the page numbers over to the right. (See LaTeX warnings and errors.)
+% \item Run through a spelling checker. (I know that can be tricky with LaTeX.) (See Content and Typesetting.)
+% \item Proofread, or have the text proofread, to check for proper English usage. In particular, note that ``allows to'' is not conventional English, and English uses articles (`a',`an',`the') in places where other languages, particularly Eastern European languages, don't have them. (See Content and Typesetting.)
+% \end{itemize}
+%
+% \section{Text}
+% Sometimes you just need to have different styles of fonts.  \emph{Sometimes you just need to have different styles of fonts.} \textbf{Sometimes you just need to have different styles of fonts.}
+%
+% Sometimes you just need to have different sizes of fonts.  {\small Sometimes you just need to have different sizes of fonts.} {\footnotesize Sometimes you just need to have different sizes of fonts.}  It would be very rare to require larger fonts within an ASP volume.
+%
+% Do \emph{not} reduce the size of the main text font to try to squeeze more content into the paper. It will be restored by the editors and the paper will be rejected as too long.
+%
+% \section{Math}
+% Sometimes authors include formulas inside the main text which should always be enclosed within \$ signs.  Look at the Pythagorean Formula $a^2 + b^2 = c^2$.
+%
+% Sometimes authors include formulas on their own lines.  This example uses the \verb"displaymath" environment which does not include an equation number.  To include an equation number, use the \verb"equation" environment.
+% \begin{displaymath}
+% c = \sqrt{a^2 + b^2} \qquad \textrm{Pythagorean Theorem}
+% \end{displaymath}
+%
+% \section{Table}
+% Here is an example table that has three colums with various justification and row spacing.
+%
+% \begin{table}[!ht]
+% \caption{Tables in \LaTeXe}
+% \smallskip
+% \begin{center}
+% {\small
+% \begin{tabular}{llc}  % l = left, c = centered
+% \tableline
+% \noalign{\smallskip}
+% First Column & Second Column & Third Column:\\
+% \noalign{\smallskip}
+% \tableline
+% \noalign{\smallskip}
+% First Row, First Column & First Row, Second Column & First Row, Third Column \\
+% Second Row, First Column & Second Row, Second Column & Second Row, Third Column \\
+% Third Row, First Column & Third Row, Second Column & Third Row, Third Column \\
+% \noalign{\smallskip}
+% \tableline % Sometimes you just need a line between table rows
+% \noalign{\smallskip}
+% Fourth Row, First Column & ~ & Fourth Row, Third Column \\ % Sometimes you have empty cells
+% \noalign{\smallskip} % Sometimes you just need space between table rows
+% Fifth Row First Column & Fifth Row, Second Column & Fifth Row, Third Column\\ % No \\ if the last row
+% \noalign{\smallskip}
+% \tableline\
+% \end{tabular}
+% }
+% \end{center}
+% \end{table}
+% \noindent These tables can get a little messy, but this format is the most common.
+%
+% \section{Lists}
+% \label{ex_lists}
+% There are a lot of ways to make lists including itemized lists with bullets, for which you use  (\verb"\begin{itemize}"), numbered lists (\verb"\begin{enumerate}"), and description lists (\verb"\begin{description}").  This is an example of an itemized list.
+%
+% \subsection{Itemized Lists}
+% Here is an itemized list:
+% \begin{itemize}
+% \item Item 1
+% \item Item 2
+% \item Item 3
+% \end{itemize}
+%
+%
+% \section{Images}
+% For some figures, see Figures \ref{ex_fig1}- \ref{ex_fig3}.
+%
+% \articlefigure{example.eps}{ex_fig1}{Welcome to 1953.}
+% % It is possible to reduce the size of a figure among other changes (see the instructions).  Here is an example:
+% % \articlefigure[width=.5\textwidth]{example.eps}{ex_fig1_reduced}{Welcome to 1953 a little smaller.}
+%
+% \articlefiguretwo{example.eps}{example.eps}{ex_fig2}{Now there are two of them.  \emph{Left:} An image from long ago.  \emph{Right:} The same exact thing.}
+% % There is a figure command allowing for three figures:
+% % \articlefigurethree{example.eps}{example.eps}{example.eps}{ex_fig1_triple}{Now there are three of them.}
+%
+% \articlefigurefour{example.eps}{example.eps}{example.eps}{example.eps}{ex_fig3}{Now four of them?}
+%
+% \clearpage % To force this stuff to happen by this point in the text, otherwise these will probably end up after the references.
+%
+% There are also the landscape versions \verb"\articlelandscapefigure" and \\
+% \verb"\articlelandscapefiguretwo" which are further described in the instructions.
+%
+% \section{References}
+% References must be provided in BibTeX format, in a .bib file, and should usually be referenced using \verb"\citet" or \verb"\citep". The file example.bib supplied with this template is taken from an ADASS 2015 paper, and includes references to previous ADASS proceedings
+% \citep[such as][]{1999ASPC..172..487P} and to papers in what was then the current 2015 proceedings (e.g.\ \citet{O11-4_adassxxv}). Note that the `TBD' entries that appear for papers in the current proceedings will be dealt with by the ADASS editors when the final volume is produced. The example .bib file has a large number of references unused by this template file; such unused references have been left in as an example, but should be removed before a paper is submitted.
+%
+% \acknowledgements The ASP would like to thank the dedicated researchers who are publishing with the ASP.  It will make things a lot easier if you keep this text on the same line as the \verb"\acknowledgements" command.
+
+
+%\bibliography{example}  % For BibTex
 
 \end{document}
